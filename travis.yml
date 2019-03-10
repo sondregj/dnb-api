@@ -1,0 +1,9 @@
+name: "Node Tests"
+language: node_js
+node_js:
+  - "8"
+  - "10"
+install:
+    - npm install
+script:
+    - npm test
