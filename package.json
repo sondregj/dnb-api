@@ -1,24 +1,24 @@
 {
-  "name": "dnb-api-client",
-  "version": "1.0.0",
-  "description": "Client wrapper for DNB Open Banking platform",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sondregj/dnb-api-client.git"
-  },
-  "keywords": [
-    "DNB",
-    "openbanking",
-    "rest"
-  ],
-  "author": "Sondre Gjellestad",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sondregj/dnb-api-client/issues"
-  },
-  "homepage": "https://github.com/sondregj/dnb-api-client#readme"
+	"name": "dnb-api-client",
+	"version": "1.0.0",
+	"description": "Client wrapper for DNB Open Banking platform",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sondregj/dnb-api-client.git"
+	},
+	"keywords": [
+		"DNB",
+		"openbanking",
+		"rest"
+	],
+	"author": "Sondre Gjellestad",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sondregj/dnb-api-client/issues"
+	},
+	"homepage": "https://github.com/sondregj/dnb-api-client#readme"
 }

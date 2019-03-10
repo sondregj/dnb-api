@@ -4,6 +4,12 @@
 
 ## Usage
 
+```javascript
+const dnbapi = require('dnb-api-client')
+
+
+```
+
 ## Development
 
 ## Testing
