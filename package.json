@@ -4,6 +4,7 @@
 	"description": "Client wrapper for DNB Open Banking platform",
 	"main": "index.js",
 	"scripts": {
+		"lint": "eslint .",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -22,6 +23,7 @@
 	},
 	"homepage": "https://github.com/sondregj/dnb-api-client#readme",
 	"devDependencies": {
-		"dotenv": "^6.2.0"
+		"dotenv": "^6.2.0",
+		"eslint": "^5.15.1"
 	}
 }

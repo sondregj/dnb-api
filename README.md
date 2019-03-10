@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sondregj/dnb-api-client.svg?branch=master)](https://travis-ci.org/sondregj/dnb-api-client)
+
 # DNB Open Banking Client
 
 > A client for DNB's various API products. *(Under development)*
@@ -11,7 +13,7 @@ const DNBApi = require('dnb-api-client')
 
 const api = new DNBApi('CLIENT_ID', 'CLIENT_SECRET', 'API_KEY')
 
-const fetchData = async () => {
+const fetchCustomerData = async () => {
 	const jwt = await api.getToken('SSN', '12345678910')
 
 	return await api.customers.getCustomerInfo(jwt)
