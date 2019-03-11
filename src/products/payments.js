@@ -1,14 +1,39 @@
+/**
+ * DNB Payments API
+ * 
+ * Requires JWT authentication
+ * 
+ * @param client to use
+ */
 class Payments {
-	constructor(apiObject) {
-		this.apiObject = apiObject
+	constructor(client) {
+		this.client = client
+
+		this.basePath = '/payments'
 	}
 
-	async initiatePayment() {
-
+	/**
+	 * 
+	 * @param {*} body object containing {debitAccountNumber, creditAccountNumber, kid, amount, currency} etc.
+	 */
+	async initiatePayment(body) {
+		try {
+			return await this.client.do.post(`${this.basePath}`, this.client.jwt, {}, body)
+		} catch (err) {
+			throw err
+		}
 	}
 
-	async deletePayment(id) {
+	async deletePayment(accountNumber, paymentId) {
+		const query = {
 
+		}
+
+		try {
+			return await this.client.do.delete(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, )
+		} catch (err) {
+
+		}
 	}
 
 	async updateExistingPayment() {

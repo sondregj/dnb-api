@@ -1,6 +1,13 @@
+/**
+ * DNB Transactions API
+ * 
+ * Requires JWT authentication
+ * 
+ * @param client to use
+ */
 class Transactions {
-	constructor(apiObject) {
-		this.apiObject = apiObject
+	constructor(client) {
+		this.client = client
 	}
 
 	async getTransactions(account) {
