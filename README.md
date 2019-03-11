@@ -3,7 +3,7 @@
 
 # DNB Open Banking Client
 
-> A client for DNB's various API products. *(Under development)*
+> A client for DNB's various API products. *(Under development, may change)*
 
 The APIs are currently under development, and only available in a sandbox. To use this API, you have to create an application on [https://developer.dnb.no](https://developer.dnb.no).
 
