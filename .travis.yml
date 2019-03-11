@@ -1,11 +1,13 @@
-name: "Node Tests"
 language: node_js
 env:
     - NODE_ENV=CI
-node_js:
-  - "8"
-  - "10"
-install:
-    - npm install
-script:
-    - npm test
+matrix:
+    include:
+        - name: Node 8
+          node_js: "8"
+        - name: Node 10
+          node_js: "10"
+        - name: Node 11
+          node_js: "11"
+install: npm install
+script: npm test
