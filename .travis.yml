@@ -1,5 +1,7 @@
 name: "Node Tests"
 language: node_js
+env:
+    - NODE_ENV=CI
 node_js:
   - "8"
   - "10"
