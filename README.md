@@ -21,7 +21,7 @@ const api = new DNBApi('CLIENT_ID', 'CLIENT_SECRET', 'API_KEY')
 const fetchCustomerData = async () => {
   const jwt = await api.getToken('SSN', '12345678910')
 
-  return await api.customers.getCustomerInfo(jwt)
+  return await api.token(jwt).customers.getCustomerInfo()
 }
 
 fetchCustomerData()
