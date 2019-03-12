@@ -1,5 +1,5 @@
 {
-	"name": "dnb-api-client",
+	"name": "dnb-api",
 	"version": "0.1.0",
 	"description": "Client for DNB Open Banking platform",
 	"main": "index.js",
