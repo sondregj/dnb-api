@@ -16,7 +16,7 @@ class API {
 		const query = {	customerId: JSON.stringify({ type: idType, value: customerId }) }
 
 		try {
-			const data = await this.client.do.get('${this.basePath}token', '', query)
+			const data = await this.client.do.get(`${this.basePath}token`, '', query)
 
 			const jwt = data.tokenInfo[0].jwtToken
 			this.client.jwt = jwt

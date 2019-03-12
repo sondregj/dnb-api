@@ -9,14 +9,9 @@ module.exports = async (params) => new Promise((resolve, reject) => {
 		res.on('end', () => {
 			try {
 				body = JSON.parse(Buffer.concat(body).toString())
-
 				if (res.statusCode < 200 || res.statusCode >= 300) {
 					req.end()
-					return reject({
-						body,
-						errorDocumentation: body.errorDocumentation,
-						errorDetails: body.errorDetails
-					})
+					return reject({body})
 				}
 			} catch (e) {
 				reject(e)
