@@ -49,7 +49,7 @@ class Payments {
 	 */
 	async updateExistingPayment(accountNumber, paymentId, body) {
 		try {
-			return await this.client.do.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, this.client.jwt)
+			return await this.client.do.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, this.client.jwt, body)
 		} catch (err) {
 			throw err
 		}
