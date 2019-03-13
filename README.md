@@ -1,5 +1,6 @@
 <h1 align="center">
-  <a href='https://developer.dnb.no' ><img src='https://svgshare.com/i/BkG.svg' width="150" title='DNB Developer' /></a>
+  <a href='https://developer.dnb.no' ><img src='https://svgshare.com/i/BkG.svg' width="250" title='DNB Developer' /></a>
+  <br>
   <br>
   DNB Open Banking Client
 </h1>
@@ -8,6 +9,7 @@
 
 [![Travis Build Status](https://img.shields.io/travis/sondregj/dnb-api.svg?style=flat-square)](https://travis-ci.org/sondregj/dnb-api)
 ![npm (latest)](https://img.shields.io/npm/v/dnb-api/latest.svg?style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/min/dnb-api.svg?style=flat-square)
 ![License](https://img.shields.io/github/license/sondregj/dnb-api.svg?style=flat-square)
 [![gitmoji badge](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://github.com/carloscuesta/gitmoji)
 
