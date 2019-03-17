@@ -36,6 +36,8 @@
 
 The APIs are currently under development, and only available in a sandbox. To use this API, you have to create an application at [https://developer.dnb.no](https://developer.dnb.no).
 
+*NOTE: None of the POST requests work yet...*
+
 See examples below.
 
 ## Usage
