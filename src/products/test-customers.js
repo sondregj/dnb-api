@@ -12,9 +12,14 @@ class TestCustomers {
 		this.basePath = '/testCustomers'
 	}
 
+	/**
+	 * Get test customers
+	 */
 	async getTestCustomers() {
 		try {
-			return await this.client.do.get(`${this.basePath}`)
+			return await this.client.do
+				.get(`${this.basePath}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

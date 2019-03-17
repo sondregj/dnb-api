@@ -14,7 +14,9 @@ class Locations {
 
 	async getDNBBranches() {
 		try {
-			return await this.client.do.get(`${this.basePath}/branches`,)
+			return await this.client.do
+				.get(`${this.basePath}/branches`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -22,7 +24,9 @@ class Locations {
 
 	async getBranchDetails(id) {
 		try {
-			return await this.client.do.get(`${this.basePath}/branches/${id}`)
+			return await this.client.do
+				.get(`${this.basePath}/branches/${id}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -30,7 +34,9 @@ class Locations {
 
 	async getDNBATMs() {
 		try {
-			return await this.client.do.get(`${this.basePath}/atms`)
+			return await this.client.do
+				.get(`${this.basePath}/atms`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -38,7 +44,9 @@ class Locations {
 
 	async findNearestBranch(latitude, longitude) {
 		try {
-			return await this.client.do.get(`${this.basePath}/branches/coordinates`, this.client.jwt, {latitude, longitude})
+			return await this.client.do
+				.get(`${this.basePath}/branches/coordinates`, {latitude, longitude})
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -46,7 +54,9 @@ class Locations {
 
 	async findNearestBranch(address) {
 		try {
-			return await this.client.do.get(`${this.basePath}/branches/findbyaddress`, this.client.jwt, {address})
+			return await this.client.do
+				.get(`${this.basePath}/branches/findbyaddress`, {address})
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -54,7 +64,9 @@ class Locations {
 
 	async findNearestATM(latitude, longitude) {
 		try {
-			return await this.client.do.get(`${this.basePath}/atms/coordinates`, this.client.jwt, {latitude, longitude})
+			return await this.client.do
+				.get(`${this.basePath}/atms/coordinates`, {latitude, longitude})
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

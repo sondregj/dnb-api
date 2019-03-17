@@ -13,39 +13,83 @@ class Payments {
 	}
 
 	/**
+	 * Initiate payment
 	 * 
 	 * @param {*} body object containing {debitAccountNumber, creditAccountNumber, kid, amount, currency} etc.
 	 */
 	async initiatePayment(body) {
 		try {
-			return await this.client.do.post(`${this.basePath}`, this.client.jwt, {}, body)
+			return await this.client.do
+				.post(`${this.basePath}`, {}, body)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
 	}
 
+
+	/**
+	 * Delete payment
+	 * 
+	 * @param {String} accountNumber 
+	 * @param {String} paymentId 
+	 */
 	async deletePayment(accountNumber, paymentId) {
-		const query = {
-
-		}
-
 		try {
-			return await this.client.do.delete(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, )
+			return await this.client.do
+				.delete(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`)
+				.then(obj => obj.json())
 		} catch (err) {
-
+			throw err
 		}
 	}
 
-	async updateExistingPayment() {
-
+	/**
+	 * Update existing payment
+	 * 
+	 * @param {String} accountNumber 
+	 * @param {String} paymentId 
+	 * @param {Object} body of request: { status, debitAccountNumber, amount, requestedExecutionDate }
+	 */
+	async updateExistingPayment(accountNumber, paymentId, body) {
+		try {
+			return await this.client.do
+				.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, {}, body)
+				.then(obj => obj.json())
+		} catch (err) {
+			throw err
+		}
 	}
 
-	async getDuePayments(account) {
-
+	/**
+	 * Get due payments for an account
+	 * 
+	 * @param {String} accountNumber 
+	 */
+	async getDuePayments(accountNumber) {
+		try {
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}/due`)
+				.then(obj => obj.json())
+		} catch (err) {
+			throw err
+		}
 	}
 
-	async getDuePayment(id) {
-
+	/**
+	 * Get a due payment for an account
+	 * 
+	 * @param {String} accountNumber 
+	 * @param {String} paymentId 
+	 */
+	async getDuePayment(accountNumber, paymentId) {
+		try {
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}/due/${paymentId}`)
+				.then(obj => obj.json())
+		} catch (err) {
+			throw err
+		}
 	}
 }
 

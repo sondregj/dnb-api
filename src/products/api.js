@@ -16,10 +16,19 @@ class API {
 		const query = {	customerId: JSON.stringify({ type: idType, value: customerId }) }
 
 		try {
-			const data = await this.client.do.get(`${this.basePath}token`, '', query)
+			const data = await this.client.do
+				.get(`${this.basePath}token`, query)
+				.then(obj => obj.json())
 
-			const jwt = data.tokenInfo[0].jwtToken
-			this.client.jwt = jwt
+			let jwt = ''
+
+			try {
+				jwt = data.tokenInfo[0].jwtToken
+			} catch (err) {
+				throw new Error('Could not get token')
+			}
+
+			this.client.token.jwt = jwt
 
 			return jwt
 		} catch (err) {

@@ -8,10 +8,27 @@
 class Transactions {
 	constructor(client) {
 		this.client = client
+
+		this.basePath = '/transactions'
 	}
 
-	async getTransactions(account) {
-		
+	/**
+	 * Get transactions from an account
+	 * 
+	 * @param {String} accountNumber to check
+	 * @param {String} fromDate format 'YYYY-MM-DD'
+	 * @param {String} toDate format 'YYYY-MM-DD'
+	 */
+	async getTransactions(accountNumber, fromDate, toDate) {
+		const query = { fromDate, toDate }
+
+		try {
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}`, query)
+				.then(obj => obj.json())
+		} catch (err) {
+			throw err
+		}
 	}
 }
 

@@ -1,3 +1,6 @@
+const Aika = require('aika')
+const headerBuilder = require('./aika/headerbuilder')
+
 // Import API product handlers
 const {	API, Accounts, Cards, Currencies, Customers, Locations,	Payments, Transactions,	TestCustomers } = require('./products')
 
@@ -10,21 +13,30 @@ const {	API, Accounts, Cards, Currencies, Customers, Locations,	Payments, Transa
  * @returns API client
  */
 class DNBApi {
-	constructor(clientId, clientSecret, apiKey, RequestHandler = require('./http')) {
+	constructor(clientId, clientSecret, apiKey) {
 		this.clientId = clientId
 		this.clientSecret = clientSecret
 		this.apiKey = apiKey
 
-		this.jwt = ''
+		this.dnbToken = {
+			jwt: ''
+		}
 
-		this.do = new RequestHandler({
-			endpoint: 'developer-api-sandbox.dnb.no',
-			awsRegion: 'eu-west-1',
-			awsService: 'execute-api',
+		// Initialize HTTP client
+		this.do = new Aika({
+			host: 'developer-api-sandbox.dnb.no'
+		})
+
+		// Add Aws signing middleware
+		this.do.use(headerBuilder({
 			clientId,
 			clientSecret,
-			apiKey
-		})
+			apiKey,
+			token: this.dnbToken,
+			hostName: 'developer-api-sandbox.dnb.no',
+			awsRegion: 'eu-west-1',
+			awsService: 'execute-api'
+		}))
 
 		this.api = new API(this)
 		this.accounts = new Accounts(this)
@@ -38,7 +50,7 @@ class DNBApi {
 	}
 
 	token(jwt) {
-		this.jwt = jwt
+		this.dnbToken.jwt = jwt
 
 		return this
 	}

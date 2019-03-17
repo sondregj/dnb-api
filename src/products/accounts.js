@@ -14,7 +14,9 @@ class Accounts {
 
 	async getAccounts() {
 		try {
-			return await this.client.do.get(`${this.basePath}`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -23,7 +25,9 @@ class Accounts {
 	async getAccountDetails(accountNumber) {
 
 		try {
-			return await this.client.do.get(`${this.basePath}/${accountNumber}`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -31,7 +35,9 @@ class Accounts {
 
 	async getAccountBalance(accountNumber) {
 		try {
-			return await this.client.do.get(`${this.basePath}/${accountNumber}/balance`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}/balance`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
