@@ -8,12 +8,14 @@
 class Customers {
 	constructor(client) {
 		this.client = client
+
+		this.basePath = '/customers'
 	}
 
 	async getCurrentCustomer() {
 		try {
 			return await this.client.do
-				.get('/customers/current')
+				.get(`${this.basePath}/current`)
 				.then(obj => obj.json())
 		} catch (err) {
 			throw err

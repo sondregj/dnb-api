@@ -20,7 +20,7 @@ class Payments {
 	async initiatePayment(body) {
 		try {
 			return await this.client.do
-				.post(`${this.basePath}`, {}, body)
+				.post(`${this.basePath}/`, null, body)
 				.then(obj => obj.json())
 		} catch (err) {
 			throw err
@@ -54,7 +54,7 @@ class Payments {
 	async updateExistingPayment(accountNumber, paymentId, body) {
 		try {
 			return await this.client.do
-				.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, {}, body)
+				.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, null, body)
 				.then(obj => obj.json())
 		} catch (err) {
 			throw err

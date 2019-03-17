@@ -23,26 +23,21 @@ module.exports = (options) => {
 		},
 
 		helpers: {
-			asv4sign: (context, options, clientId, clientSecret) => {
-				if (options.method === 'POST') {
-					options.body = '{}'
-				} else {
-					options.body = ''
-				}
+			asv4sign: (context, request, clientId, clientSecret) => {
 			
 				const algorithm = 'AWS4-HMAC-SHA256'
 				const amzDate = context.helpers.createAmzDate()
 				const dateStamp = amzDate.substr(0, 8)
-				const queryStringMatch = options.path.match(/(.*)\?/)
+				const queryStringMatch = request.path.match(/(.*)\?/)
 
-				let canonicalUri = options.path
+				let canonicalUri = request.path
 				if (queryStringMatch !== null) {
 					const firstMatchIndex = 1
 					canonicalUri = queryStringMatch[firstMatchIndex]
 				}
 
-				const canonicalQuerystring = querystring.stringify(options.query)
-				const canonicalHeaders = `host:${options.host}\nx-amz-date:${amzDate}\n`
+				const canonicalQuerystring = querystring.stringify(request.query)
+				const canonicalHeaders = `host:${request.host}\nx-amz-date:${amzDate}\n`
 				const signedHeaders = 'host;x-amz-date'
 			
 				const signingKey = context.helpers.getSignatureKey(
@@ -50,12 +45,12 @@ module.exports = (options) => {
 					clientSecret, 
 					dateStamp, 
 					context.constants.awsService, 
-					context.constants.awsRegion
+					context.constants.awsRegion	
 				)
-			
-				const payloadHash = context.helpers.hashHex(options.body ? JSON.stringify(options.body) : '')
+		
+				const payloadHash = context.helpers.hashHex(request.body ? JSON.stringify(request.body) : '')
 				
-				const canonicalRequest = `${options.method}\n${canonicalUri}\n${canonicalQuerystring}\n${canonicalHeaders}\n${signedHeaders}\n${payloadHash}`
+				const canonicalRequest = `${request.method}\n${canonicalUri}\n${canonicalQuerystring}\n${canonicalHeaders}\n${signedHeaders}\n${payloadHash}`
 		
 				const credentialScope = `${dateStamp}/${context.constants.awsRegion}/${context.constants.awsService}/aws4_request`
 				const stringToSign = `${algorithm}\n${amzDate}\n${credentialScope}\n${context.helpers.hashHex(canonicalRequest)}`
