@@ -19,7 +19,9 @@ class Payments {
 	 */
 	async initiatePayment(body) {
 		try {
-			return await this.client.do.post(`${this.basePath}`, this.client.jwt, {}, body)
+			return await this.client.do
+				.post(`${this.basePath}`, {}, body)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -34,7 +36,9 @@ class Payments {
 	 */
 	async deletePayment(accountNumber, paymentId) {
 		try {
-			return await this.client.do.delete(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, this.client.jwt)
+			return await this.client.do
+				.delete(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -49,7 +53,9 @@ class Payments {
 	 */
 	async updateExistingPayment(accountNumber, paymentId, body) {
 		try {
-			return await this.client.do.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, this.client.jwt, body)
+			return await this.client.do
+				.patch(`${this.basePath}/${accountNumber}/pending-payments/${paymentId}`, {}, body)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -62,7 +68,9 @@ class Payments {
 	 */
 	async getDuePayments(accountNumber) {
 		try {
-			return await this.client.do.get(`${this.basePath}/${accountNumber}/due`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}/due`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -76,7 +84,9 @@ class Payments {
 	 */
 	async getDuePayment(accountNumber, paymentId) {
 		try {
-			return await this.client.do.get(`${this.basePath}/${accountNumber}/due/${paymentId}`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}/due/${paymentId}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

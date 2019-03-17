@@ -23,7 +23,9 @@ class Transactions {
 		const query = { fromDate, toDate }
 
 		try {
-			return await this.client.do.get(`${this.basePath}/${accountNumber}`, this.client.jwt, query)
+			return await this.client.do
+				.get(`${this.basePath}/${accountNumber}`, query)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

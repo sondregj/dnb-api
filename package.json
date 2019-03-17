@@ -1,6 +1,6 @@
 {
 	"name": "dnb-api",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Client for DNB Open Banking platform",
 	"main": "index.js",
 	"scripts": {
@@ -28,6 +28,6 @@
 		"eslint": "^5.15.2"
 	},
 	"dependencies": {
-		"aika": "0.1.0"
+		"aika": "^0.1.2"
 	}
 }

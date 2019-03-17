@@ -12,7 +12,9 @@ class Customers {
 
 	async getCurrentCustomer() {
 		try {
-			return await this.client.do.get('/customers/current', this.client.jwt)
+			return await this.client.do
+				.get('/customers/current')
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

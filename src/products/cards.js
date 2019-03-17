@@ -14,7 +14,9 @@ class Cards {
 
 	async getCards() {
 		try {
-			return await this.client.do.get(`${this.basePath}`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -22,7 +24,9 @@ class Cards {
 
 	async getCard(id) {
 		try {
-			return await this.client.do.get(`${this.basePath}/${id}`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${id}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -30,7 +34,9 @@ class Cards {
 
 	async getCardBalance(id) {
 		try {
-			return await this.client.do.get(`${this.basePath}/${id}/balance`, this.client.jwt)
+			return await this.client.do
+				.get(`${this.basePath}/${id}/balance`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -38,7 +44,9 @@ class Cards {
 
 	async blockCard(id) {
 		try {
-			return await this.client.do.put(`${this.basePath}/${id}/block`, this.client.jwt)
+			return await this.client.do
+				.put(`${this.basePath}/${id}/block`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -46,7 +54,9 @@ class Cards {
 
 	async unblockCard(id) {
 		try {
-			return await this.client.do.put(`${this.basePath}/${id}/unblock`, this.client.jwt)
+			return await this.client.do
+				.put(`${this.basePath}/${id}/unblock`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}

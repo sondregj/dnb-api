@@ -16,7 +16,7 @@ class Currencies {
 		try {
 			return await this.client.do
 				.get(`${this.basePath}/${fromCurrency}`)
-
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -24,11 +24,9 @@ class Currencies {
 
 	async getCurrencyRate(fromCurrency, toCurrency) {
 		try {
-			return await this
-				.client
-				.do
+			return await this.client.do
 				.get(`${this.basePath}/${fromCurrency}/convert/${toCurrency}`)
-
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
