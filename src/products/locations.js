@@ -16,6 +16,7 @@ class Locations {
 		try {
 			return await this.client.do
 				.get(`${this.basePath}/branches`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
@@ -25,6 +26,7 @@ class Locations {
 		try {
 			return await this.client.do
 				.get(`${this.basePath}/branches/${id}`)
+				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
