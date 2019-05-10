@@ -1,6 +1,9 @@
 const Aika = require('aika')
 const headerBuilder = require('./aika/headerbuilder')
 
+const liveModeHost = 'developer-api.dnb.no'
+const testModeHost = 'developer-api-testmode.dnb.no'
+
 // Import API product handlers
 const {	API, Accounts, Cards, Currencies, Customers, Locations,	Payments, Transactions,	TestCustomers } = require('./products')
 
@@ -9,11 +12,11 @@ const {	API, Accounts, Cards, Currencies, Customers, Locations,	Payments, Transa
  * @param clientId of the application
  * @param clientSecret of the application
  * @param apiKey of the application
- * @param RequestHandler to use, use default
  * @returns API client
  */
+
 class DNBApi {
-	constructor(clientId, clientSecret, apiKey) {
+	constructor(clientId, clientSecret, apiKey, liveMode = false) {
 		this.clientId = clientId
 		this.clientSecret = clientSecret
 		this.apiKey = apiKey
@@ -24,7 +27,7 @@ class DNBApi {
 
 		// Initialize HTTP client
 		this.do = new Aika({
-			host: 'developer-api-sandbox.dnb.no'
+			host: liveMode ? liveModeHost : testModeHost
 		})
 
 		// Add Aws signing middleware
@@ -33,7 +36,7 @@ class DNBApi {
 			clientSecret,
 			apiKey,
 			token: this.dnbToken,
-			hostName: 'developer-api-sandbox.dnb.no',
+			hostName: liveMode ? liveModeHost : testModeHost,
 			awsRegion: 'eu-west-1',
 			awsService: 'execute-api'
 		}))
