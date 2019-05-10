@@ -9,23 +9,23 @@ class Currencies {
 	constructor(client) {
 		this.client = client
 
-		this.basePath = '/currencies'
+		this.basePath = '/currencies/v1'
 	}
 
 	async getCurrencyRateList(fromCurrency) {
 		try {
 			return await this.client.do
-				.get(`${this.basePath}/${fromCurrency}`)
+				.get(`${this.basePath}/convert/${fromCurrency}`)
 				.then(obj => obj.json())
 		} catch (err) {
 			throw err
 		}
 	}
 
-	async getCurrencyRate(fromCurrency, toCurrency) {
+	async getCurrencyRate(baseCurrency, quoteCurrency) {
 		try {
 			return await this.client.do
-				.get(`${this.basePath}/${fromCurrency}/convert/${toCurrency}`)
+				.get(`${this.basePath}/${baseCurrency}/convert/${quoteCurrency}`)
 				.then(obj => obj.json())
 		} catch (err) {
 			throw err
