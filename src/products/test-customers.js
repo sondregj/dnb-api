@@ -9,7 +9,7 @@ class TestCustomers {
 	constructor(client) {
 		this.client = client
 
-		this.basePath = '/testCustomers'
+		this.basePath = '/test-customers'
 	}
 
 	/**
