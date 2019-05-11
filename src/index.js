@@ -1,8 +1,8 @@
 const Aika = require('aika')
 const headerBuilder = require('./aika/headerbuilder')
 
-const liveModeHost = 'developer-api.dnb.no'
-const testModeHost = 'developer-api-testmode.dnb.no'
+const LIVE_HOST = 'developer-api.dnb.no'
+const TEST_HOST = 'developer-api-testmode.dnb.no'
 
 // Import API product handlers
 const {	API, Cards, Currencies, Customers, Locations, TestCustomers } = require('./products')
@@ -16,10 +16,34 @@ const {	API, Cards, Currencies, Customers, Locations, TestCustomers } = require(
  */
 
 class DNBApi {
-	constructor(clientId, clientSecret, apiKey, liveMode = false) {
+	constructor(options) {
+		if (!options) {
+			throw new Error('Please specify options.')
+		}
+
+		const { 
+			clientId, 
+			clientSecret, 
+			apiKey, 
+			liveMode, 
+			service, 
+			region, 
+			endpoint 
+		} = options
+
+		if (!(clientId, clientSecret, apiKey)) {
+			throw new Error('You need to specify clientId, clientSecret and apiKey.')
+		}
+
 		this.clientId = clientId
 		this.clientSecret = clientSecret
 		this.apiKey = apiKey
+
+		this.service = service || 'execute-api'
+		this.region = region || 'eu-west-1'
+		this.host = endpoint || liveMode 
+			? LIVE_HOST
+			: TEST_HOST
 
 		this.dnbToken = {
 			jwt: ''
@@ -27,7 +51,7 @@ class DNBApi {
 
 		// Initialize HTTP client
 		this.do = new Aika({
-			host: liveMode ? liveModeHost : testModeHost
+			host: this.host
 		})
 
 		// Add Aws signing middleware
@@ -36,19 +60,16 @@ class DNBApi {
 			clientSecret,
 			apiKey,
 			token: this.dnbToken,
-			hostName: liveMode ? liveModeHost : testModeHost,
-			awsRegion: 'eu-west-1',
-			awsService: 'execute-api'
+			hostName: this.host,
+			awsRegion: this.region,
+			awsService: this.service
 		}))
 
 		this.api = new API(this)
-		this.accounts = new Accounts(this)
 		this.cards = new Cards(this)
 		this.currencies = new Currencies(this)
 		this.customers = new Customers(this)
 		this.locations = new Locations(this)
-		this.payments = new Payments(this)
-		this.transactions = new Transactions(this)
 		this.testCustomers = new TestCustomers(this)
 	}
 
