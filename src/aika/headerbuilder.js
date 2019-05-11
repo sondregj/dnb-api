@@ -25,6 +25,10 @@ module.exports = (options) => {
 		helpers: {
 			asv4sign: (context, request, clientId, clientSecret) => {
 			
+				if (request.path !== '/tokens') {
+					return null
+				}
+
 				const algorithm = 'AWS4-HMAC-SHA256'
 				const amzDate = context.helpers.createAmzDate()
 				const dateStamp = amzDate.substr(0, 8)
@@ -48,10 +52,19 @@ module.exports = (options) => {
 					context.constants.awsRegion	
 				)
 		
-				const payloadHash = context.helpers.hashHex(request.body ? JSON.stringify(request.body) : '')
+				let payloadHash
+
+				if (request.body && request.method === 'POST') {
+					let stringified = JSON.stringify(request.body)
+					request.body = stringified
+
+					payloadHash = context.helpers.hashHex(stringified)
+				} else {
+					payloadHash = context.helpers.hashHex('')
+				}
 				
 				const canonicalRequest = `${request.method}\n${canonicalUri}\n${canonicalQuerystring}\n${canonicalHeaders}\n${signedHeaders}\n${payloadHash}`
-		
+
 				const credentialScope = `${dateStamp}/${context.constants.awsRegion}/${context.constants.awsService}/aws4_request`
 				const stringToSign = `${algorithm}\n${amzDate}\n${credentialScope}\n${context.helpers.hashHex(canonicalRequest)}`
 
@@ -82,6 +95,7 @@ module.exports = (options) => {
 			'x-api-key': c => c.constants.apiKey,
 			'x-amz-date': c => c.helpers.createAmzDate(),
 			'x-dnbapi-jwt': c => c.constants.token.jwt,
+			'x-amz-content-sha256': (c, r) => r.body ? c.helpers.hashHex(JSON.stringify(r.body)) : null,
 			Authorization: (c, r) => c.helpers.asv4sign(c, r, c.constants.clientId, c.constants.clientSecret),
 		}
 	})
