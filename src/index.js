@@ -5,7 +5,7 @@ const liveModeHost = 'developer-api.dnb.no'
 const testModeHost = 'developer-api-testmode.dnb.no'
 
 // Import API product handlers
-const {	API, Accounts, Cards, Currencies, Customers, Locations,	Payments, Transactions,	TestCustomers } = require('./products')
+const {	API, Cards, Currencies, Customers, Locations, TestCustomers } = require('./products')
 
 /**
  * DNBApi
