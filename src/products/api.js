@@ -12,25 +12,25 @@ class API {
 		this.basePath = '/'
 	}
 
-	async getToken(idType, customerId) {
-		const query = {	customerId: JSON.stringify({ type: idType, value: customerId }) }
+	async getToken(ssn) {
+		const body = { ssn }
 
 		try {
 			const data = await this.client.do
-				.get(`${this.basePath}token`, query)
+				.post(`${this.basePath}tokens`, null, body)
 				.then(obj => obj.json())
 
 			let jwt = ''
 
 			try {
-				jwt = data.tokenInfo[0].jwtToken
+				jwt = data.jwtToken
 			} catch (err) {
 				throw new Error('Could not get token')
 			}
 
-			this.client.token.jwt = jwt
+			this.client.dnbToken.jwt = jwt
 
-			return jwt
+			return data
 		} catch (err) {
 			throw err
 		}
